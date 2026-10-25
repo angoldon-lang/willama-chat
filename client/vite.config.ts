@@ -155,11 +155,11 @@ export default defineConfig(({ command }) => ({
       },
       includeAssets: [],
       manifest: {
-        name: 'LibreChat',
-        short_name: 'LibreChat',
+        name: 'Willama-chat',
+        short_name: 'Willama-chat',
         display: 'standalone',
         background_color: '#000000',
-        theme_color: '#009688',
+        theme_color: '#4f46e5',
         icons: [
           {
             src: 'assets/favicon-32x32.png',

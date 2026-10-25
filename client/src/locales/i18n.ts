@@ -150,6 +150,9 @@ const localeAliases: Record<string, SupportedLocale> = {
   'zh-mo': 'zh-Hant',
 };
 
+/** Willama-chat opens in Italian until the user picks another language. */
+const DEFAULT_LOCALE: SupportedLocale = 'it';
+
 const loadedLocales = new Set<SupportedLocale>(['en']);
 const loadingLocales: Partial<Record<SupportedLocale, Promise<SupportedLocale>>> = {};
 let languageRequestId = 0;
@@ -218,7 +221,7 @@ export function normalizeLocale(locale?: string | null): SupportedLocale {
 export function detectInitialLanguage() {
   const cookieLang = readCookie('lang');
   const storedLang = readStoredLanguage();
-  return normalizeLocale(cookieLang || storedLang || getNavigatorLanguage());
+  return normalizeLocale(cookieLang || storedLang || DEFAULT_LOCALE);
 }
 
 export async function ensureLocale(locale?: string | null): Promise<SupportedLocale> {
