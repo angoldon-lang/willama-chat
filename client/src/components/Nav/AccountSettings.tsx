@@ -5,6 +5,7 @@ import * as Menu from '@ariakit/react/menu';
 import { GearIcon, DropdownMenuSeparator, Avatar } from '@librechat/client';
 import {
   Archive,
+  BarChart3,
   ChevronRight,
   CircleHelp,
   Files,
@@ -17,6 +18,7 @@ import {
 import { ArchivedChatsModal } from '~/components/Nav/SettingsTabs/General/ArchivedChatsModal';
 import { filesDialogTriggerAtom, showFilesDialogAtom } from '~/store/filesDialog';
 import useDirection, { inlineSide } from '~/hooks/Nav/useDirection';
+import { useNavigate } from 'react-router-dom';
 import { useGetStartupConfig } from '~/data-provider';
 import { useAuthContext } from '~/hooks/AuthContext';
 import { openInNewTab, policyUrls } from '~/utils';
@@ -101,6 +103,7 @@ function AccountSettings({ collapsed = false }: { collapsed?: boolean }) {
   const { user, logout } = useAuthContext();
   const { data: startupConfig } = useGetStartupConfig();
   const { privacyPolicyUrl, termsOfServiceUrl } = policyUrls(startupConfig);
+  const navigate = useNavigate();
   const setShowSettings = useSetAtom(settingsOpenAtom);
   const setShowFiles = useSetAtom(showFilesDialogAtom);
   const setFilesDialogTrigger = useSetAtom(filesDialogTriggerAtom);
@@ -171,6 +174,14 @@ function AccountSettings({ collapsed = false }: { collapsed?: boolean }) {
         >
           <Files className="icon-md" aria-hidden="true" />
           {localize('com_nav_my_files')}
+        </Menu.MenuItem>
+        <Menu.MenuItem
+          onClick={() => navigate('/usage')}
+          className="select-item text-sm"
+          data-testid="nav-usage"
+        >
+          <BarChart3 className="icon-md" aria-hidden="true" />
+          {localize('com_willama_title')}
         </Menu.MenuItem>
         <Menu.MenuItem
           onClick={() => setShowSettings(true)}

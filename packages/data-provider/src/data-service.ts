@@ -7,6 +7,7 @@ import type {
   TTraceRecordDetail,
 } from './types/traces';
 import type { TInsightsAccessResponse, TInsightsParams, TInsightsResponse } from './types/insights';
+import type { TWillamaRange, TWillamaTraffic, TWillamaUsage } from './types/willama';
 import type { ScheduleMCPConsentView, ConfirmScheduleMCPConsent } from './types/scheduleConsent';
 import type { CodeSetupAttempt, CodeSetupApprovalRequest } from './codeSetup';
 import type { TFileConfig } from './file-config';
@@ -42,6 +43,29 @@ export function getInsights(params: TInsightsParams = {}): Promise<TInsightsResp
   }
   const suffix = query.toString() ? `?${query.toString()}` : '';
   return request.get(`${endpoints.insights()}${suffix}`);
+}
+
+const rangeQuery = ({ from, to }: TWillamaRange = {}) => {
+  const query = new URLSearchParams();
+  if (from) {
+    query.set('from', from);
+  }
+  if (to) {
+    query.set('to', to);
+  }
+  return query.toString() ? `?${query.toString()}` : '';
+};
+
+export function getWillamaUsage(range?: TWillamaRange): Promise<TWillamaUsage> {
+  return request.get(`${endpoints.willamaUsage()}${rangeQuery(range)}`);
+}
+
+export function getWillamaAdminUsage(range?: TWillamaRange): Promise<TWillamaUsage> {
+  return request.get(`${endpoints.willamaAdminUsage()}${rangeQuery(range)}`);
+}
+
+export function getWillamaAdminTraffic(range?: TWillamaRange): Promise<TWillamaTraffic> {
+  return request.get(`${endpoints.willamaAdminTraffic()}${rangeQuery(range)}`);
 }
 
 export function getInsightsAccess(): Promise<TInsightsAccessResponse> {

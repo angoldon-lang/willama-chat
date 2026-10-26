@@ -19,6 +19,7 @@ import { createResourceLockModel } from './resourceLock';
 import { createChatProjectModel } from './chatProject';
 import { createAgentApiKeyModel } from './agentApiKey';
 import { createTransactionModel } from './transaction';
+import { createAiTrafficModel } from './aiTraffic';
 import { createPromptGroupModel } from './promptGroup';
 import { createSystemGrantModel } from './systemGrant';
 import { createPluginAuthModel } from './pluginAuth';
@@ -79,6 +80,7 @@ export function createModels(mongoose: typeof import('mongoose')): {
   Key: ReturnType<typeof createKeyModel>;
   PluginAuth: ReturnType<typeof createPluginAuthModel>;
   Transaction: ReturnType<typeof createTransactionModel>;
+  AiTrafficStat: ReturnType<typeof createAiTrafficModel>;
   Preset: ReturnType<typeof createPresetModel>;
   Prompt: ReturnType<typeof createPromptModel>;
   PromptGroup: ReturnType<typeof createPromptGroupModel>;
@@ -134,6 +136,7 @@ export function createModels(mongoose: typeof import('mongoose')): {
     Key: createKeyModel(mongoose),
     PluginAuth: createPluginAuthModel(mongoose),
     Transaction: createTransactionModel(mongoose),
+    AiTrafficStat: createAiTrafficModel(mongoose),
     Preset: createPresetModel(mongoose),
     Prompt: createPromptModel(mongoose),
     PromptGroup: createPromptGroupModel(mongoose),

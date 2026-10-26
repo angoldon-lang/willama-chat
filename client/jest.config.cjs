@@ -1,4 +1,4 @@
-/** 2026.10.1 */
+/** 2026.10.2 */
 const { maxWorkers } = require('../config/jest.workers.cjs');
 
 module.exports = {

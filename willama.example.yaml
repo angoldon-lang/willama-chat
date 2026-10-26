@@ -27,3 +27,17 @@ endpoints:
       # OpenRouter instrada su modelli con token di stop diversi: meglio non inviarlo.
       dropParams: ['stop']
       modelDisplayLabel: 'OpenRouter'
+
+    # Cortecs (https://cortecs.ai) — API compatibile OpenAI. Chiave in .env: CORTECS_API_KEY=...
+    - name: 'Cortecs'
+      apiKey: '${CORTECS_API_KEY}'
+      baseURL: 'https://api.cortecs.ai/v1'
+      models:
+        # Con fetch: true l'elenco reale viene letto da Cortecs; 'default' è solo la lista di riserva
+        # e va allineata ai modelli disponibili sul vostro account.
+        default: ['gpt-oss-120b']
+        fetch: true
+      titleConvo: true
+      titleModel: 'current_model'
+      dropParams: ['stop']
+      modelDisplayLabel: 'Cortecs'

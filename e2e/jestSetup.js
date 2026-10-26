@@ -1,3 +1,3 @@
-// 2026.10.1
+// 2026.10.2
 // See .env.test.example for an example of the '.env.test' file.
 require('dotenv').config({ path: './e2e/.env.test' });

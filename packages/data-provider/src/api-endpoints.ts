@@ -555,6 +555,10 @@ export const skillFile = (id: string, relativePath: string) =>
 export const insights = () => `${BASE_URL}/api/insights`;
 export const insightsAccess = () => `${insights()}/access`;
 
+export const willamaUsage = () => `${BASE_URL}/api/willama/usage`;
+export const willamaAdminUsage = () => `${BASE_URL}/api/admin/willama/usage`;
+export const willamaAdminTraffic = () => `${BASE_URL}/api/admin/willama/traffic`;
+
 /* Conversation traces */
 export const conversationTrace = (conversationId: string) =>
   `${BASE_URL}/api/traces/${encodeURIComponent(conversationId)}`;

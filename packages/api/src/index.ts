@@ -120,6 +120,7 @@ export * from './langfuse';
 export * from './traces';
 /* Insights */
 export * from './insights';
+export * from './willama';
 /* Cache */
 export * from './cache';
 /* Cluster */

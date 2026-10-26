@@ -1,6 +1,6 @@
 # Willama-chat — Guida all'installazione
 
-Versione documentata: **2026.10.1**
+Versione documentata: **2026.10.2**
 
 ## 1. Requisiti
 
@@ -61,7 +61,29 @@ npm run backend:dev      # http://localhost:3080  (richiede MongoDB in esecuzion
 npm run frontend:dev     # http://localhost:3090
 ```
 
-## 5. Verifica di OpenRouter
+## 5. Cortecs, consumi e monitoraggio
+
+**Cortecs** (<https://cortecs.ai>): crea la chiave dal tuo account, mettila in `.env` come
+`CORTECS_API_KEY=...` e riavvia (`docker compose up -d --force-recreate api`). L'endpoint
+**Cortecs** è già in `willama.example.yaml`; i modelli vengono letti dall'API (`fetch: true`).
+
+**Dashboard consumi** — menu account (in basso a sinistra) → *Consumi e costi* (`/usage`):
+- ogni utente vede i propri consumi per giorno e per modello;
+- gli admin vedono anche i costi di tutti gli utenti e il traffico verso l'AI.
+
+Il costo si calcola come token × prezzo del provider (listini pubblici di OpenRouter e Cortecs,
+in cache 1 ora), **più il ricarico del 20%** (`WILLAMA_COST_MARKUP_PERCENT`, default 20). Per i modelli
+che nessun listino riporta si usa la tariffa registrata da LibreChat; per forzare un prezzo usa
+`WILLAMA_PRICE_OVERRIDES` (USD per 1M token). Il costo è calcolato con i prezzi *attuali*: se un
+provider cambia listino, anche lo storico viene ricalcolato.
+
+**Monitoraggio anonimo (solo admin)** — registra, per giorno/endpoint/modello, soltanto contatori:
+messaggi inviati, fasce di lunghezza e quanti messaggi contengono email, telefoni, IBAN,
+numeri di carta, codici fiscali, IP o chiavi API. **Non** salva testo, utente, conversazione o
+allegati. Si disattiva con `WILLAMA_TRAFFIC_MONITOR=false`. Poiché analizza il contenuto dei messaggi,
+ricordati di citarlo nell'informativa privacy agli utenti.
+
+## 6. Verifica di OpenRouter
 
 1. Con la chiave in `.env` e `librechat.yaml` montato, riavvia: `docker compose up -d --force-recreate api`.
 2. Nei log (`docker compose logs api`) non devono comparire errori di validazione di `librechat.yaml`.
@@ -74,7 +96,7 @@ npm run frontend:dev     # http://localhost:3090
 Problemi frequenti: elenco modelli vuoto → chiave mancante/errata o `.env` non letto;
 errore 401 → chiave non valida; errore 402 → credito OpenRouter esaurito.
 
-## 6. Versioni e rilasci
+## 7. Versioni e rilasci
 
 Schema `ANNO.MESE.REVISIONE` (es. `2026.10.1`). Per un nuovo rilascio aggiorna `VERSION`,
 `package.json` (root, `api`, `client`), `package-lock.json`, `helm/librechat/Chart.yaml`

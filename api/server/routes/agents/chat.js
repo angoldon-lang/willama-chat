@@ -19,6 +19,7 @@ const {
   buildEndpointOption,
   canAccessAgentFromBody,
 } = require('~/server/middleware');
+const { trafficMiddleware } = require('~/server/services/willama');
 const { initializeClient } = require('~/server/services/Endpoints/agents');
 const guardSubagentThreadTurn = require('~/server/middleware/validate/subagentThreadTurn');
 const AgentController = require('~/server/controllers/agents/request');
@@ -74,6 +75,7 @@ router.use(
   }),
 );
 router.use(moderateText);
+router.use(trafficMiddleware);
 router.use(checkAgentAccess);
 router.use(checkAgentResourceAccess);
 router.use(validateConvoAccess);
