@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Constants, hasConfiguredFooter } from 'librechat-data-provider';
+import { hasConfiguredFooter } from 'librechat-data-provider';
 import type { TStartupConfig } from 'librechat-data-provider';
 import { useGetStartupConfig } from '~/data-provider';
 import { policyUrls } from '~/utils/policies';
@@ -92,12 +92,8 @@ function Footer({ className, startupConfig, configuredOnly = false }: FooterProp
 
   const configuredFooter = typeof config?.customFooter === 'string' ? config.customFooter : null;
   /** The generic disclaimer is the part a conversation drops; the operator's own footer is not. */
-  const genericFooter = configuredOnly
-    ? ''
-    : '[LibreChat ' +
-      Constants.VERSION +
-      '](https://librechat.ai) - ' +
-      localize('com_ui_latest_footer');
+  /** Willama-chat shows no upstream branding or version line; only an operator-configured footer. */
+  const genericFooter = '';
   const mainContent = configuredFooter ?? genericFooter;
   const mainContentParts = mainContent === '' ? [] : mainContent.split('|');
 

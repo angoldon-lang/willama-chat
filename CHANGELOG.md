@@ -5,6 +5,8 @@ e cresce a ogni rilascio dello stesso mese. Tag git: `v2026.10.1`.
 
 ## 2026.10.2 — 2026-10-26
 
+- Rimossa dalla home la scritta/footer "LibreChat" (resta un footer personalizzato se configurato)
+
 - Integrazione **Cortecs** (<https://cortecs.ai>) come endpoint personalizzato (`willama.example.yaml`)
 - **Dashboard consumi e costi** (menu account → "Consumi e costi", rotta `/usage`):
   consumi personali per modello e per giorno; per gli admin anche costi di tutti gli utenti
