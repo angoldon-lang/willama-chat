@@ -21,6 +21,7 @@ export type AiTrafficSizeBucket = (typeof AI_TRAFFIC_SIZE_BUCKETS)[number];
  * Anonymous daily aggregate of what is sent to AI endpoints.
  * Deliberately has no user, conversation or message reference and no text.
  */
+// @ts-ignore `model` collides with Document#model, as in the Transaction schema
 export interface IAiTrafficStat extends Document {
   day: string;
   endpoint: string;
