@@ -19,12 +19,10 @@ jest.mock('~/hooks', () => ({
 }));
 
 describe('Footer', () => {
-  test('opens the default LibreChat site link in a new tab', () => {
+  test('shows no upstream branding when no custom footer is configured', () => {
     render(<Footer startupConfig={null} />);
-    const link = screen.getByRole('link', { name: /LibreChat/ });
-    expect(link).toHaveAttribute('href', 'https://librechat.ai');
-    expect(link).toHaveAttribute('target', '_blank');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.queryByRole('link', { name: /LibreChat/ })).not.toBeInTheDocument();
+    expect(screen.queryByText(/LibreChat/)).not.toBeInTheDocument();
   });
 
   test('opens custom footer markdown links in a new tab', () => {
