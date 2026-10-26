@@ -36,7 +36,7 @@ export interface IAiTrafficStat extends Document {
 const counters = (keys: readonly string[]) =>
   Object.fromEntries(keys.map((key) => [key, { type: Number, default: 0 }]));
 
-const aiTrafficSchema = new Schema<IAiTrafficStat>(
+const aiTrafficSchema: Schema<IAiTrafficStat> = new Schema<IAiTrafficStat>(
   {
     day: { type: String, required: true },
     endpoint: { type: String, required: true },
